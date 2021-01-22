@@ -37,7 +37,8 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
 ENABLE_CPUSETS := true
-ENABLE_SCHEDBOOST := true
+# FIXME: There's no support for schedboot/tuning on mainline
+#ENABLE_SCHEDBOOST := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := msm8998
@@ -57,6 +58,7 @@ BOARD_KERNEL_CMDLINE += service_locator.enable=1 swiotlb=2048 androidboot.usbcon
 BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a800000.dwc3 
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += enforcing=0 clk_ignore_unused
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -94,13 +96,13 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_DEFAULT_BRIGHTNESS := "26"
+# FIXME: Add path to DRM DSI display when testing panel driver as well
+#TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+#TW_DEFAULT_BRIGHTNESS := "26"
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXCLUDE_SUPERSU := true
-TW_EXTRA_LANGUAGES := true
+#TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_THEME := portrait_hdpi
 TW_USE_TOOLBOX := true
 
@@ -108,8 +110,9 @@ TW_USE_TOOLBOX := true
 TARGET_INIT_VENDOR_LIB := libinit_cheeseburger_dumpling
 TARGET_RECOVERY_DEVICE_MODULES := libinit_cheeseburger_dumpling
 
-#Extra
+# Extras
 BOARD_SUPPRESS_SECURE_ERASE := true
 TW_IGNORE_MISC_WIPE_DATA := true
 TW_EXCLUDE_TWRPAPP := true
-TW_HAS_EDL_MODE := true
+# FIXME: Choosing EDL reboot performs only regular reboot
+#TW_HAS_EDL_MODE := true
